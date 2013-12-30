@@ -250,7 +250,7 @@ public class Game implements ApplicationListener{
 		startTime = TimeUtils.millis();
 		aliens = new Array<Rectangle>();
 		bullets = new Array<Bullet2D>();
-		
+		//k
 	}
 
 	@Override
