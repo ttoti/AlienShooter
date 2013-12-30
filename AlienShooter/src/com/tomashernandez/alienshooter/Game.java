@@ -123,10 +123,10 @@ public class Game implements ApplicationListener{
 				startTime = TimeUtils.millis();
 				aliens = new Array<Rectangle>();
 				bullets = new Array<Bullet2D>();
+				//There's a bug in here where the aliens don't start spawning again
 			}
 			
 		}else{
-		
 			// Render 
 			batch.setProjectionMatrix(camera.combined);
 			batch.begin();
