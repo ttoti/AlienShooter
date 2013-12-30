@@ -109,21 +109,14 @@ public class Game implements ApplicationListener{
 		if(gameOver){
 			batch.setProjectionMatrix(camera.combined);
 			batch.begin();
-			gofont.draw(batch, "Game Over!", CAMERA_WIDTH / 2 - gofont.getBounds("Game Over!").width/2, CAMERA_HEIGHT / 2 + 100);
-			font.draw(batch, "Score : " + score, CAMERA_WIDTH / 2 - font.getBounds("Score : XX").width/2, CAMERA_HEIGHT / 2);
+			gofont.draw(batch, "Game Over!", CAMERA_WIDTH / 2 - gofont.getBounds("Game Over!").width / 2, CAMERA_HEIGHT / 2 + 100);
+			font.draw(batch, "Score : " + score, CAMERA_WIDTH / 2 - font.getBounds("Score : XX").width / 2, CAMERA_HEIGHT / 2);
+			gofont.draw(batch,"Tap to restart", CAMERA_WIDTH / 2 - gofont.getBounds("Tap to restart").width / 2, CAMERA_HEIGHT / 2 - 100 );
 			batch.end();
 			
-			/** Input **/
+			//When screen is touched when game over screen appears
 			if(Gdx.input.isTouched() ) {
-				levelUp = 0;
-				difficultyMultiplier = 0;
-				score = 0;
-				lives = 5;
-				gameOver = false;
-				startTime = TimeUtils.millis();
-				aliens = new Array<Rectangle>();
-				bullets = new Array<Bullet2D>();
-				//There's a bug in here where the aliens don't start spawning again
+				defaultValues();
 			}
 			
 		}else{
@@ -183,6 +176,7 @@ public class Game implements ApplicationListener{
 			Iterator<Rectangle> iterb = aliens.iterator();
 			while(iterb.hasNext()){
 				Rectangle b = iterb.next();
+				//Direction aliens move as well as the aliens move faster
 				b.y -= Gdx.graphics.getDeltaTime() * (200 + ( (TimeUtils.millis() - startTime )/ 1000) );
 				if(b.y + 128 < rect_tower.y){
 					iterb.remove();
@@ -245,6 +239,18 @@ public class Game implements ApplicationListener{
 		b.height = 64;		
 		aliens.add(b);		
 		lastAlienTime = TimeUtils.nanoTime();	
+	}
+	
+	public void defaultValues(){
+		levelUp = 0;
+		difficultyMultiplier = 1;
+		score = 0;
+		lives = 5;
+		gameOver = false;
+		startTime = TimeUtils.millis();
+		aliens = new Array<Rectangle>();
+		bullets = new Array<Bullet2D>();
+		
 	}
 
 	@Override
