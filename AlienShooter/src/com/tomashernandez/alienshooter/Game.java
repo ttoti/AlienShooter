@@ -213,12 +213,6 @@ public class Game implements ApplicationListener{
 	}
 
 	@Override
-	public void resize(int arg0, int arg1) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
 	public void resume() {
 		// TODO Auto-generated method stub
 		
@@ -250,6 +244,12 @@ public class Game implements ApplicationListener{
 		b.width = 64;
 		b.height = 64;		
 		aliens.add(b);		
-		lastAlienTime = TimeUtils.nanoTime();		
+		lastAlienTime = TimeUtils.nanoTime();	
+	}
+
+	@Override
+	public void resize(int arg0, int arg1) {
+		// TODO Auto-generated method stub
+		
 	}
 }
