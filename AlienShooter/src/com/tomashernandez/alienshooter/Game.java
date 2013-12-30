@@ -115,6 +115,8 @@ public class Game implements ApplicationListener{
 			
 			/** Input **/
 			if(Gdx.input.isTouched() ) {
+				levelUp = 0;
+				difficultyMultiplier = 0;
 				score = 0;
 				lives = 5;
 				gameOver = false;
@@ -153,14 +155,21 @@ public class Game implements ApplicationListener{
 						Rectangle baddie = iterb.next();
 						if(baddie.overlaps(b.rect)){
 							hitSound.play();
-							/*This somehow is crashing the game*/
 							iter.remove();
-							/*                                 */
 							iterb.remove();
 							score++;
 							levelUp++;
-							if(levelUp == 10){
+							
+							//In charge of multiplier and lives
+							if(score >= 40 && (levelUp % 10) == 0){
 								lives++;
+							}
+							if(levelUp == 10 &&  score <= 30){
+								lives++;
+								difficultyMultiplier++;
+								levelUpSound.play();
+								levelUp = 0;
+							}else if(levelUp == 40){
 								difficultyMultiplier++;
 								levelUpSound.play();
 								levelUp = 0;
@@ -239,7 +248,7 @@ public class Game implements ApplicationListener{
 	private void spawnBaddie(){
 		Rectangle b = new Rectangle();
 		b.x = MathUtils.random(0, CAMERA_WIDTH - 64);
-		b.y = 0 + 64;
+		b.y = MathUtils.random(0, 64);
 		b.width = 64;
 		b.height = 64;		
 		aliens.add(b);		
