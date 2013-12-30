@@ -71,7 +71,7 @@ public class Game implements ApplicationListener{
 		rect_tower.width = 64;
 		rect_tower.height = 64;
 		rect_tower.x = (CAMERA_WIDTH / 2) - (rect_tower.width / 2);
-		rect_tower.y = (CAMERA_HEIGHT) - (rect_tower.height) - 20;
+		rect_tower.y = (CAMERA_HEIGHT) - (rect_tower.height) - 700;
 		
 		/** Bullet sprite **/
 		bullet = new Texture(Gdx.files.internal("bullet.png"));		
@@ -127,7 +127,7 @@ public class Game implements ApplicationListener{
 			
 		}else{
 		
-			/** Render **/
+			// Render 
 			batch.setProjectionMatrix(camera.combined);
 			batch.begin();
 			font.draw(batch, "Score: " + score, 10, CAMERA_HEIGHT - 10);
@@ -143,13 +143,14 @@ public class Game implements ApplicationListener{
 			
 			Iterator<Bullet2D> iter = bullets.iterator();
 			while(iter.hasNext()){
+				//When bullet goes past camera boundaries
 				Bullet2D b = iter.next();
 				b.rect.y += Gdx.graphics.getDeltaTime() * b.slope.y;
 				b.rect.x += Gdx.graphics.getDeltaTime() * b.slope.x;
 				if(b.rect.y + 16 < 0){
 					iter.remove();
-					//Log.i("", "Bullet Removed");
 				}else{
+					//When bullet hits an alien
 					Iterator<Rectangle> iterb = aliens.iterator();
 					while(iterb.hasNext()){
 						Rectangle baddie = iterb.next();
@@ -174,7 +175,6 @@ public class Game implements ApplicationListener{
 								levelUpSound.play();
 								levelUp = 0;
 							}
-							//Log.i("score", score +"");
 						}
 					}
 				}
@@ -183,8 +183,8 @@ public class Game implements ApplicationListener{
 			Iterator<Rectangle> iterb = aliens.iterator();
 			while(iterb.hasNext()){
 				Rectangle b = iterb.next();
-				b.y += Gdx.graphics.getDeltaTime() * (200 + ( (TimeUtils.millis() - startTime )/ 1000) );
-				if(b.y - 64 > rect_tower.y){
+				b.y -= Gdx.graphics.getDeltaTime() * (200 + ( (TimeUtils.millis() - startTime )/ 1000) );
+				if(b.y + 128 < rect_tower.y){
 					iterb.remove();
 					//Log.i("", "Lost a life!");
 					lives--;
@@ -195,12 +195,11 @@ public class Game implements ApplicationListener{
 			//Spawn Aliens
 			if(TimeUtils.nanoTime() - lastAlienTime > 3000000000l){
 				for(int x = 0; x < difficultyMultiplier; x++){
-					spawnBaddie();
+					spawnAlien();
 				}
-				//Log.i("", "Alien Spawned");
 			}
 			
-			/** Input **/
+			//Input
 			if(Gdx.input.isTouched() ) {
 				Vector3 touchPos = new Vector3();
 				touchPos.set(Gdx.input.getX(), Gdx.input.getY(), 0);
@@ -208,7 +207,6 @@ public class Game implements ApplicationListener{
 				if(TimeUtils.nanoTime() - lastShotTime > 200000000l){				
 					spawnBullet(touchPos.x, touchPos.y);
 				}
-				//Log.i("Touch Pos", "[X: " + touchPos.x + ", Y: " + touchPos.y + "]");
 			}
 		}
 		
@@ -233,7 +231,7 @@ public class Game implements ApplicationListener{
 		rect_b.width = 16;
 		rect_b.height = 16;		
 		rect_b.x = (CAMERA_WIDTH / 2) - (rect_b.width / 2);
-		rect_b.y = (CAMERA_HEIGHT) - (rect_tower.height);
+		rect_b.y = (100) - (rect_tower.height);
 		b.rect = rect_b;
 		
 		Vector2 slope = new Vector2((dirX - rect_b.x), (dirY - rect_b.y));
@@ -244,16 +242,14 @@ public class Game implements ApplicationListener{
 		bullets.add(b);
 		lastShotTime = TimeUtils.nanoTime();
 	}
-	
-	private void spawnBaddie(){
+	//Where the alien spawns as well as the size of it
+	private void spawnAlien(){
 		Rectangle b = new Rectangle();
 		b.x = MathUtils.random(0, CAMERA_WIDTH - 64);
-		b.y = MathUtils.random(0, 64);
+		b.y = MathUtils.random(CAMERA_HEIGHT - 64, CAMERA_HEIGHT);
 		b.width = 64;
 		b.height = 64;		
 		aliens.add(b);		
-		lastAlienTime = TimeUtils.nanoTime();
-		
+		lastAlienTime = TimeUtils.nanoTime();		
 	}
-
 }
