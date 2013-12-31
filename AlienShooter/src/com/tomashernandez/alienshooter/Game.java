@@ -17,11 +17,13 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.TimeUtils;
+//Gotta add vibration
 
 public class Game implements ApplicationListener{
 
 	private static final int CAMERA_WIDTH = 480;
 	private static final int CAMERA_HEIGHT = 800;
+	
 	
 	Background background;
 	Sound levelUpSound;
@@ -91,6 +93,8 @@ public class Game implements ApplicationListener{
 		bgRegion = new TextureRegion(bgTexture);
 		background = new Background(new ParallaxLayer[]{
 				new ParallaxLayer(bgRegion, new Vector2(), new Vector2(0, 0)),
+				
+				//First vector2 is parallax ratio. I only have the value in Y cause it makes sense to the game.
 				new ParallaxLayer(bgRegion, new Vector2(0, .0055f + ((TimeUtils.millis() - startTime )/ 1000)), new Vector2(0, 1))
 		}, 480, 900, new Vector2(0, 350));
 	}
