@@ -22,6 +22,7 @@ public class Game implements ApplicationListener{
 	private static final int CAMERA_WIDTH = 480;
 	private static final int CAMERA_HEIGHT = 800;
 	
+	Background background;
 	Sound levelUpSound;
 	Sound hitSound;
 	Texture tower;
@@ -65,7 +66,7 @@ public class Game implements ApplicationListener{
 		levelUp = 0;
 		difficultyMultiplier = 1;
 		
-		/** Tower sprite **/
+		//Tower sprite
 		tower = new Texture(Gdx.files.internal("tower.png"));
 		rect_tower = new Rectangle();
 		rect_tower.width = 64;
@@ -73,16 +74,17 @@ public class Game implements ApplicationListener{
 		rect_tower.x = (CAMERA_WIDTH / 2) - (rect_tower.width / 2);
 		rect_tower.y = (CAMERA_HEIGHT) - (rect_tower.height) - 700;
 		
-		/** Bullet sprite **/
+		//Bullet sprite
 		bullet = new Texture(Gdx.files.internal("bullet.png"));		
 		
-		/** Baddy sprite **/
+		//Alien sprite 
 		alien = new Texture(Gdx.files.internal("alien.png"));
 		
 		//Sound
 		hitSound = Gdx.audio.newSound(Gdx.files.internal("shoot.ogg"));
 		levelUpSound = Gdx.audio.newSound(Gdx.files.internal("levelUp.ogg"));
 		
+		//Background
 	}
 
 	@Override
