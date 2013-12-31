@@ -10,6 +10,7 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
@@ -22,7 +23,7 @@ public class Game implements ApplicationListener{
 	private static final int CAMERA_WIDTH = 480;
 	private static final int CAMERA_HEIGHT = 800;
 	
-	Background background;
+	
 	Sound levelUpSound;
 	Sound hitSound;
 	Texture tower;
@@ -85,6 +86,11 @@ public class Game implements ApplicationListener{
 		levelUpSound = Gdx.audio.newSound(Gdx.files.internal("levelUp.ogg"));
 		
 		//Background
+		TextureRegion bgRegion = new TextureRegion[0];
+		
+		Background background = new Background(new ParallaxLayer[]{
+				new ParallaxLayer(bgRegion, new Vector2(), new Vector2(0,0))
+		}, 480, 800, new Vector2(350, 0));
 	}
 
 	@Override
