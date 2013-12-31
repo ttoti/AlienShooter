@@ -1,21 +1,25 @@
 package com.tomashernandez.alienshooter;
 
-import com.badlogic.gdx.ApplicationListener;
 
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.scenes.scene2d.ui.TextButton;	
-import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.tomashernandez.alienshooter.Game;
+import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.EventListener;
+import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.tomashernandez.alienshooter.*;
 
 
-public class Menu implements ApplicationListener {
-	
-	 	private static final float BUTTON_WIDTH = 300f;
-	    private static final float BUTTON_HEIGHT = 60f;
-	    private static final float BUTTON_SPACING = 10f;
-	
+public class Menu implements Screen {
+
 	@Override
 	public void dispose() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void hide() {
 		// TODO Auto-generated method stub
 		
 	}
@@ -26,6 +30,11 @@ public class Menu implements ApplicationListener {
 		
 	}
 
+	@Override
+	public void render(float arg0) {
+		// TODO Auto-generated method stub
+		
+	}
 
 	@Override
 	public void resize(int arg0, int arg1) {
@@ -40,16 +49,11 @@ public class Menu implements ApplicationListener {
 	}
 
 	@Override
-	public void create() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void render() {
-		// TODO Auto-generated method stub
+	public void show() {
+		Table table = new Table();
+		table.add("Alien Shooter!").spaceBottom(50);
+		table.row();
 		
 	}
 	
-
 }
