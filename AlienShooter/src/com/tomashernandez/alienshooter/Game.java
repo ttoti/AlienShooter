@@ -23,7 +23,7 @@ public class Game implements ApplicationListener{
 	private static final int CAMERA_WIDTH = 480;
 	private static final int CAMERA_HEIGHT = 800;
 	
-	
+	Background background;
 	Sound levelUpSound;
 	Sound hitSound;
 	Texture tower;
@@ -37,6 +37,7 @@ public class Game implements ApplicationListener{
 	OrthographicCamera camera;
 	SpriteBatch batch;
 	BitmapFont font;
+	TextureRegion bgRegion;
 	BitmapFont gofont;
 	long startTime;
 	long lastShotTime;
@@ -54,10 +55,10 @@ public class Game implements ApplicationListener{
 		batch = new SpriteBatch();
 		font = new BitmapFont();
 		font.scale(1f);
-		font.setColor(Color.BLACK);
+		font.setColor(Color.WHITE);
 		gofont = new BitmapFont();
 		gofont.scale(2f);
-		gofont.setColor(Color.BLACK);
+		gofont.setColor(Color.WHITE);
 		bullets = new Array<Bullet2D>();
 		aliens = new Array<Rectangle>();
 		startTime = TimeUtils.millis();
@@ -86,19 +87,22 @@ public class Game implements ApplicationListener{
 		levelUpSound = Gdx.audio.newSound(Gdx.files.internal("levelUp.ogg"));
 		
 		//Background
-		TextureRegion bgRegion = new TextureRegion[0];
-		
-		Background background = new Background(new ParallaxLayer[]{
-				new ParallaxLayer(bgRegion, new Vector2(), new Vector2(0,0))
-		}, 480, 800, new Vector2(350, 0));
+		Texture bgTexture = new Texture(Gdx.files.internal("spaceBG.png"));
+		bgRegion = new TextureRegion(bgTexture);
+		background = new Background(new ParallaxLayer[]{
+				new ParallaxLayer(bgRegion, new Vector2(), new Vector2(0, 0)),
+				new ParallaxLayer(bgRegion, new Vector2(0, .0055f + ((TimeUtils.millis() - startTime )/ 1000)), new Vector2(0, 1))
+		}, 480, 900, new Vector2(0, 350));
 	}
 
+	//Disposes when not being used
 	@Override
 	public void dispose() {
 		tower.dispose();
 		bullet.dispose();
 		alien.dispose();
 		hitSound.dispose();
+		background.dispose();
 		levelUpSound.dispose();
 	}
 
@@ -112,6 +116,8 @@ public class Game implements ApplicationListener{
 	public void render() {
 		Gdx.gl.glClearColor(1f, 1f, 1f, 0.5f);
 		Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
+		//Renders the background
+		background.render(1);
 		camera.update();
 		
 		if(gameOver){
@@ -211,7 +217,6 @@ public class Game implements ApplicationListener{
 				}
 			}
 		}
-		
 	}
 
 	@Override

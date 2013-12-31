@@ -25,6 +25,9 @@ public class Background {
       camera = new OrthographicCamera(width, height);
       batch = new SpriteBatch();
    }
+   public void dispose(){
+	   //Disposes the Background
+   }
    
    public void render(float delta){
       this.camera.position.add(speed.x*delta,speed.y*delta, 0);
