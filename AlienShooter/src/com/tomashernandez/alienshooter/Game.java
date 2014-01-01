@@ -29,8 +29,8 @@ public class Game implements ApplicationListener{
 	Background background;
 	Sound levelUpSound;
 	Sound hitSound;
-	Texture tower;
-	Rectangle rect_tower;
+	Texture ship;
+	Rectangle rect_ship;
 	Texture alien;
 	Rectangle rect_alien;
 	Texture bullet;
@@ -71,13 +71,13 @@ public class Game implements ApplicationListener{
 		levelUp = 0;
 		difficultyMultiplier = 1;
 		
-		//Tower sprite
-		tower = new Texture(Gdx.files.internal("tower.png"));
-		rect_tower = new Rectangle();
-		rect_tower.width = 64;
-		rect_tower.height = 64;
-		rect_tower.x = (CAMERA_WIDTH / 2) - (rect_tower.width / 2);
-		rect_tower.y = (CAMERA_HEIGHT) - (rect_tower.height) - 700;
+		//ship sprite
+		ship = new Texture(Gdx.files.internal("ship.png"));
+		rect_ship = new Rectangle();
+		rect_ship.width = 64;
+		rect_ship.height = 64;
+		rect_ship.x = (CAMERA_WIDTH / 2) - (rect_ship.width / 2);
+		rect_ship.y = (CAMERA_HEIGHT) - (rect_ship.height) - 700;
 		
 		//Bullet sprite
 		bullet = new Texture(Gdx.files.internal("bullet.png"));		
@@ -103,7 +103,7 @@ public class Game implements ApplicationListener{
 	//Disposes when not being used
 	@Override
 	public void dispose() {
-		tower.dispose();
+		ship.dispose();
 		bullet.dispose();
 		alien.dispose();
 		hitSound.dispose();
@@ -150,11 +150,12 @@ public class Game implements ApplicationListener{
 			for(Bullet2D b : bullets){
 				batch.draw(bullet, b.rect.x, b.rect.y);
 			}
-			batch.draw(tower, rect_tower.x, rect_tower.y);
+			batch.draw(ship, rect_ship.x, rect_ship.y);
 			batch.end();
 			
 			Iterator<Bullet2D> iter = bullets.iterator();
 			while(iter.hasNext()){
+				
 				//When bullet goes past camera boundaries
 				Bullet2D b = iter.next();
 				b.rect.y += Gdx.graphics.getDeltaTime() * b.slope.y;
@@ -198,7 +199,7 @@ public class Game implements ApplicationListener{
 				//Direction aliens move as well as the aliens move faster
 				b.y -= Gdx.graphics.getDeltaTime() * (200 + ( (TimeUtils.millis() - startTime )/ 1000) );
 				//When alien goes past you
-				if(b.y + 128 < rect_tower.y){
+				if(b.y + 128 < rect_ship.y){
 					iterb.remove();
 					lives--;
 					//Vibrate is in milliseconds
@@ -239,7 +240,7 @@ public class Game implements ApplicationListener{
 		rect_b.width = 16;
 		rect_b.height = 16;		
 		rect_b.x = (CAMERA_WIDTH / 2) - (rect_b.width / 2);
-		rect_b.y = (100) - (rect_tower.height);
+		rect_b.y = (100) - (rect_ship.height);
 		b.rect = rect_b;
 		
 		Vector2 slope = new Vector2((dirX - rect_b.x), (dirY - rect_b.y));
