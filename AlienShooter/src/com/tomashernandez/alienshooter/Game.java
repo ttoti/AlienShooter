@@ -3,6 +3,7 @@ package com.tomashernandez.alienshooter;
 import java.util.Iterator;
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL10;
@@ -17,14 +18,14 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.TimeUtils;
-//Gotta add vibration
+
 
 public class Game implements ApplicationListener{
 
 	private static final int CAMERA_WIDTH = 480;
 	private static final int CAMERA_HEIGHT = 800;
 	
-	
+	Input vibrate;
 	Background background;
 	Sound levelUpSound;
 	Sound hitSound;
@@ -196,10 +197,12 @@ public class Game implements ApplicationListener{
 				Rectangle b = iterb.next();
 				//Direction aliens move as well as the aliens move faster
 				b.y -= Gdx.graphics.getDeltaTime() * (200 + ( (TimeUtils.millis() - startTime )/ 1000) );
+				//When alien goes past you
 				if(b.y + 128 < rect_tower.y){
 					iterb.remove();
-					//Log.i("", "Lost a life!");
 					lives--;
+					//Vibrate is in milliseconds
+					Gdx.input.vibrate(250);
 					if(lives <= 0)
 						gameOver = true;
 				}
