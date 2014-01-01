@@ -4,6 +4,7 @@ import java.util.Iterator;
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.Input.Peripheral;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL10;
@@ -50,6 +51,7 @@ public class Game implements ApplicationListener{
 	int difficultyMultiplier;
 	int levelUp;
 	private boolean gameOver;
+	float adjustedX;
 	
 	@Override
 	public void create() {
@@ -76,8 +78,8 @@ public class Game implements ApplicationListener{
 		rect_ship = new Rectangle();
 		rect_ship.width = 64;
 		rect_ship.height = 64;
-		rect_ship.x = (CAMERA_WIDTH / 2) - (rect_ship.width / 2);
-		rect_ship.y = (CAMERA_HEIGHT) - (rect_ship.height) - 700;
+		rect_ship.x = (CAMERA_WIDTH / 2) - (rect_ship.width / 2) - 25;
+		rect_ship.y = (CAMERA_HEIGHT) - (rect_ship.height) - 750;
 		
 		//Bullet sprite
 		bullet = new Texture(Gdx.files.internal("bullet.png"));		
