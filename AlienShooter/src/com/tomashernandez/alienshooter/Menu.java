@@ -1,13 +1,8 @@
 package com.tomashernandez.alienshooter;
 
-
-import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.badlogic.gdx.scenes.scene2d.EventListener;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.scenes.scene2d.ui.Skin;
-import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
-import com.tomashernandez.alienshooter.*;
+
+
 
 
 public class Menu implements Screen {
@@ -50,9 +45,7 @@ public class Menu implements Screen {
 
 	@Override
 	public void show() {
-		Table table = new Table();
-		table.add("Alien Shooter!").spaceBottom(50);
-		table.row();
+		
 		
 	}
 	

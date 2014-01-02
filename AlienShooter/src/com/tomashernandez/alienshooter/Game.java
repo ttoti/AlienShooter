@@ -29,6 +29,7 @@ public class Game implements ApplicationListener{
 	Input vibrate;
 	Background background;
 	Music backgroundMusic;
+	Sound liveUpSound;
 	Sound levelUpSound;
 	Sound hitSound;
 	Sound shootSound;
@@ -107,6 +108,8 @@ public class Game implements ApplicationListener{
 		levelUpSound = Gdx.audio.newSound(Gdx.files.internal("levelUp.wav"));
 		levelUpSound.setVolume(0, 0.75f);
 		
+		liveUpSound = Gdx.audio.newSound(Gdx.files.internal("liveUp.ogg"));
+		
 		shootSound = Gdx.audio.newSound(Gdx.files.internal("shootSound.mp3"));
 		
 		//Background music
@@ -136,6 +139,7 @@ public class Game implements ApplicationListener{
 		levelUpSound.dispose();
 		shootSound.dispose();
 		backgroundMusic.dispose();
+		liveUpSound.dispose();
 	}
 
 	@Override
@@ -203,14 +207,22 @@ public class Game implements ApplicationListener{
 							levelUp++;
 							
 							//In charge of multiplier and lives
+							
+							//If the score is over 40, it creates a little more balance in the game
+							//So it doesn't spam with level ups. The lives go up every 10 kills
+							//That's where the is a modulus 10
 							if(score >= 40 && (levelUp % 10) == 0){
 								lives++;
+								liveUpSound.play();
 							}
-							if(levelUp == 10 &&  score <= 30){
+							//When 
+							else if(levelUp == 10 &&  score <= 30){
 								lives++;
+								liveUpSound.play();
 								difficultyMultiplier++;
 								levelUpSound.play();
 								levelUp = 0;
+							//When levelUp hits 40, after score of 30
 							}else if(levelUp == 40){
 								difficultyMultiplier++;
 								levelUpSound.play();
