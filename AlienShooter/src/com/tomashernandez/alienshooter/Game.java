@@ -4,7 +4,6 @@ import java.util.Iterator;
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
-import com.badlogic.gdx.Input.Peripheral;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL10;
@@ -74,18 +73,22 @@ public class Game implements ApplicationListener{
 		difficultyMultiplier = 1;
 		
 		//ship sprite
-		float adjustedX =(Gdx.input.getAccelerometerX() - 2f);
+	/*	This is a work in progress
+	 * 
+	 * float adjustedX =(Gdx.input.getAccelerometerX() - 2f);
 		if(adjustedX < - 2f){
 			adjustedX = - 2f;
 		}else if(adjustedX > 2f){
 			adjustedX = 2f;
 		}
 		adjustedX /= 2;
+		*/
+		
 		ship = new Texture(Gdx.files.internal("ship.png"));
 		rect_ship = new Rectangle();
 		rect_ship.width = 64;
 		rect_ship.height = 64;
-		rect_ship.x = adjustedX; //(CAMERA_WIDTH / 2) - (rect_ship.width / 2) - 25;
+		rect_ship.x = (CAMERA_WIDTH / 2) - (rect_ship.width / 2) - 25;
 		rect_ship.y = (CAMERA_HEIGHT) - (rect_ship.height) - 750;
 		
 		
