@@ -23,8 +23,8 @@ import com.badlogic.gdx.utils.TimeUtils;
 
 public class Game implements ApplicationListener{
 
-	private static final int CAMERA_WIDTH = 480;
-	private static final int CAMERA_HEIGHT = 800;
+	static final int CAMERA_WIDTH = 480;
+	static final int CAMERA_HEIGHT = 800;
 	
 	Input vibrate;
 	Background background;
@@ -74,12 +74,20 @@ public class Game implements ApplicationListener{
 		difficultyMultiplier = 1;
 		
 		//ship sprite
+		float adjustedX =(Gdx.input.getAccelerometerX() - 2f);
+		if(adjustedX < - 2f){
+			adjustedX = - 2f;
+		}else if(adjustedX > 2f){
+			adjustedX = 2f;
+		}
+		adjustedX /= 2;
 		ship = new Texture(Gdx.files.internal("ship.png"));
 		rect_ship = new Rectangle();
 		rect_ship.width = 64;
 		rect_ship.height = 64;
-		rect_ship.x = (CAMERA_WIDTH / 2) - (rect_ship.width / 2) - 25;
+		rect_ship.x = adjustedX; //(CAMERA_WIDTH / 2) - (rect_ship.width / 2) - 25;
 		rect_ship.y = (CAMERA_HEIGHT) - (rect_ship.height) - 750;
+		
 		
 		//Bullet sprite
 		bullet = new Texture(Gdx.files.internal("bullet.png"));		
@@ -95,11 +103,10 @@ public class Game implements ApplicationListener{
 		Texture bgTexture = new Texture(Gdx.files.internal("spaceBG.png"));
 		bgRegion = new TextureRegion(bgTexture);
 		background = new Background(new ParallaxLayer[]{
-				new ParallaxLayer(bgRegion, new Vector2(), new Vector2(0, 0)),
-				
 				//First vector2 is parallax ratio. I only have the value in Y cause it makes sense to the game.
-				new ParallaxLayer(bgRegion, new Vector2(0, .0055f + ((TimeUtils.millis() - startTime )/ 1000)), new Vector2(0, 1))
-		}, 480, 900, new Vector2(0, 350));
+				//Second vector2 is the start position
+				new ParallaxLayer(bgRegion, new Vector2(0, .0055f + ((TimeUtils.millis() - startTime )/ 1000)), new Vector2(0, 0))
+		}, 480, 800, new Vector2(0, 350));
 	}
 
 	//Disposes when not being used
