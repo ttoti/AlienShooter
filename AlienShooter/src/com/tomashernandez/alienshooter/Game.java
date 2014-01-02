@@ -53,7 +53,7 @@ public class Game implements ApplicationListener{
 	int difficultyMultiplier;
 	int levelUp;
 	private boolean gameOver;
-	float adjustedX;
+    //float adjustedX;
 	
 	@Override
 	public void create() {
@@ -104,7 +104,7 @@ public class Game implements ApplicationListener{
 		//Sounds
 		hitSound = Gdx.audio.newSound(Gdx.files.internal("shoot.ogg"));
 		
-		levelUpSound = Gdx.audio.newSound(Gdx.files.internal("levelUp.ogg"));
+		levelUpSound = Gdx.audio.newSound(Gdx.files.internal("levelUp.wav"));
 		levelUpSound.setVolume(0, 0.75f);
 		
 		shootSound = Gdx.audio.newSound(Gdx.files.internal("shootSound.mp3"));
@@ -112,7 +112,7 @@ public class Game implements ApplicationListener{
 		//Background music
 		backgroundMusic = Gdx.audio.newMusic(Gdx.files.internal("backgroundMusic.mp3"));
 		backgroundMusic.setLooping(true);
-		backgroundMusic.setVolume(0.5f);
+		backgroundMusic.setVolume(0.6f);
 	
 		
 		//Background
