@@ -4,6 +4,7 @@ import java.util.Iterator;
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL10;
@@ -27,8 +28,10 @@ public class Game implements ApplicationListener{
 	
 	Input vibrate;
 	Background background;
+	Music backgroundMusic;
 	Sound levelUpSound;
 	Sound hitSound;
+	Sound shootSound;
 	Texture ship;
 	Rectangle rect_ship;
 	Texture alien;
@@ -98,9 +101,19 @@ public class Game implements ApplicationListener{
 		//Alien sprite 
 		alien = new Texture(Gdx.files.internal("alien.png"));
 		
-		//Sound
+		//Sounds
 		hitSound = Gdx.audio.newSound(Gdx.files.internal("shoot.ogg"));
+		
 		levelUpSound = Gdx.audio.newSound(Gdx.files.internal("levelUp.ogg"));
+		levelUpSound.setVolume(0, 0.75f);
+		
+		shootSound = Gdx.audio.newSound(Gdx.files.internal("shootSound.mp3"));
+		
+		//Background music
+		backgroundMusic = Gdx.audio.newMusic(Gdx.files.internal("backgroundMusic.mp3"));
+		backgroundMusic.setLooping(true);
+		backgroundMusic.setVolume(0.5f);
+	
 		
 		//Background
 		Texture bgTexture = new Texture(Gdx.files.internal("spaceBG.png"));
@@ -121,6 +134,8 @@ public class Game implements ApplicationListener{
 		hitSound.dispose();
 		background.dispose();
 		levelUpSound.dispose();
+		shootSound.dispose();
+		backgroundMusic.dispose();
 	}
 
 	@Override
@@ -136,6 +151,7 @@ public class Game implements ApplicationListener{
 		//Renders the background
 		background.render(1);
 		camera.update();
+		backgroundMusic.play();
 		
 		if(gameOver){
 			batch.setProjectionMatrix(camera.combined);
@@ -261,6 +277,7 @@ public class Game implements ApplicationListener{
 		b.slope = slope;
 		
 		bullets.add(b);
+		shootSound.play();
 		lastShotTime = TimeUtils.nanoTime();
 	}
 	//Where the alien spawns as well as the size of it
@@ -268,8 +285,8 @@ public class Game implements ApplicationListener{
 		Rectangle b = new Rectangle();
 		b.x = MathUtils.random(0, CAMERA_WIDTH - 64);
 		b.y = MathUtils.random(CAMERA_HEIGHT - 64, CAMERA_HEIGHT);
-		b.width = 64;
-		b.height = 64;		
+		b.width = 128;
+		b.height = 128;		
 		aliens.add(b);		
 		lastAlienTime = TimeUtils.nanoTime();	
 	}
