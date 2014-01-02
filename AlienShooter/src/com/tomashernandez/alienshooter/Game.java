@@ -144,7 +144,7 @@ public class Game implements ApplicationListener{
 
 	@Override
 	public void pause() {
-		// TODO Auto-generated method stub
+		
 		
 	}
 

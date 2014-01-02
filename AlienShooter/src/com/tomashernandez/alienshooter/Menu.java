@@ -1,12 +1,23 @@
 package com.tomashernandez.alienshooter;
 
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.GL10;
+import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.tomashernandez.alienshooter.Game;
 
 
 
-
-public class Menu implements Screen {
-
+public class Menu extends AbstractScreen {
+	private SpriteBatch batch;
+	private Game game;
+	private Texture texture;
+	private OrthographicCamera camera;
+	
+	
+	
 	@Override
 	public void dispose() {
 		// TODO Auto-generated method stub
