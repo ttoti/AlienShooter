@@ -223,7 +223,8 @@ public class Game implements ApplicationListener{
 								levelUpSound.play();
 								levelUp = 0;
 							//When levelUp hits 40, after score of 30
-							}else if(levelUp == 40){
+							}
+							if(levelUp == 40){
 								difficultyMultiplier++;
 								levelUpSound.play();
 								levelUp = 0;

@@ -10,7 +10,7 @@ import com.tomashernandez.alienshooter.Game;
 
 
 
-public class Menu extends AbstractScreen {
+public class Menu implements Screen {
 	private SpriteBatch batch;
 	private Game game;
 	private Texture texture;
