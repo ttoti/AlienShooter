@@ -174,7 +174,8 @@ public class Game implements ApplicationListener{
 			// Render 
 			batch.setProjectionMatrix(camera.combined);
 			batch.begin();
-			font.draw(batch, "Score: " + score, 10, CAMERA_HEIGHT - 10);
+			font.draw(batch, "Level: " + difficultyMultiplier, 17, CAMERA_HEIGHT - 10);
+			font.draw(batch, "Score: " + score, 10, CAMERA_HEIGHT - 40);
 			font.draw(batch, "Lives: " + lives, CAMERA_WIDTH - 120, CAMERA_HEIGHT - 10);
 			for(Rectangle b : aliens){
 				batch.draw(alien, b.x, b.y);
@@ -298,8 +299,8 @@ public class Game implements ApplicationListener{
 		Rectangle b = new Rectangle();
 		b.x = MathUtils.random(0, CAMERA_WIDTH - 64);
 		b.y = MathUtils.random(CAMERA_HEIGHT - 64, CAMERA_HEIGHT);
-		b.width = 128;
-		b.height = 128;		
+		b.width = 100;
+		b.height = 100;		
 		aliens.add(b);		
 		lastAlienTime = TimeUtils.nanoTime();	
 	}
