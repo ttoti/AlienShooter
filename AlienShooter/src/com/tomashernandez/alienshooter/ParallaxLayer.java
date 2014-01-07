@@ -23,4 +23,5 @@ public class ParallaxLayer{
       this.startPosition = startPosition;
       this.padding = padding;
    }
+   
 }
