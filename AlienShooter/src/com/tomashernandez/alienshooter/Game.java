@@ -23,8 +23,8 @@ import com.badlogic.gdx.utils.TimeUtils;
 
 public class Game implements ApplicationListener{
 
-	static final int CAMERA_WIDTH = 480;
-	static final int CAMERA_HEIGHT = 800;
+ 	public static final int CAMERA_WIDTH = 480;
+	public static final int CAMERA_HEIGHT = 800;
 	
 	Input vibrate;
 	Background background;
