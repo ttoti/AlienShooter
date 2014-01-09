@@ -30,30 +30,17 @@ public class Game implements ApplicationListener{
 	Input vibrate;
 	Background background;
 	Music backgroundMusic;
-	Sound liveUpSound;
-	Sound levelUpSound;
-	Sound hitSound;
-	Sound shootSound;
-	Texture ship;
-	Rectangle rect_ship;
-	Texture alien;
-	Rectangle rect_alien;
-	Texture bullet;
-	Rectangle rect_bullet;
+	Sound liveUpSound, levelUpSound, hitSound, shootSound;
+	Texture ship, alien, bullet;
+	Rectangle rect_ship, rect_alien, rect_bullet;
 	Array<Bullet2D> bullets;
 	Array<Rectangle> aliens;
 	OrthographicCamera camera;
 	SpriteBatch batch;
-	BitmapFont font;
+	BitmapFont font, goFont;
 	TextureRegion bgRegion;
-	BitmapFont gofont;
-	long startTime;
-	long lastShotTime;
-	long lastAlienTime;
-	int score;
-	int lives;
-	int difficultyMultiplier;
-	int levelUp;
+	long startTime, lastShotTime, lastAlienTime;
+	int score, lives, difficultyMultiplier, levelUp;
 	private boolean gameOver;
 	
 	@Override
@@ -64,9 +51,9 @@ public class Game implements ApplicationListener{
 		font = new BitmapFont();
 		font.scale(1f);
 		font.setColor(Color.WHITE);
-		gofont = new BitmapFont();
-		gofont.scale(2f);
-		gofont.setColor(Color.WHITE);
+		goFont = new BitmapFont();
+		goFont.scale(2f);
+		goFont.setColor(Color.WHITE);
 		defaultValues();
 		createSprites();
 		
@@ -129,9 +116,9 @@ public class Game implements ApplicationListener{
 		if(gameOver){
 			batch.setProjectionMatrix(camera.combined);
 			batch.begin();
-			gofont.draw(batch, "Game Over!", CAMERA_WIDTH / 2 - gofont.getBounds("Game Over!").width / 2, CAMERA_HEIGHT / 2 + 100);
+			goFont.draw(batch, "Game Over!", CAMERA_WIDTH / 2 - goFont.getBounds("Game Over!").width / 2, CAMERA_HEIGHT / 2 + 100);
 			font.draw(batch, "Score : " + score, CAMERA_WIDTH / 2 - font.getBounds("Score : XX").width / 2, CAMERA_HEIGHT / 2);
-			gofont.draw(batch,"Tap to restart", CAMERA_WIDTH / 2 - gofont.getBounds("Tap to restart").width / 2, CAMERA_HEIGHT / 2 - 100 );
+			goFont.draw(batch,"Tap to restart", CAMERA_WIDTH / 2 - goFont.getBounds("Tap to restart").width / 2, CAMERA_HEIGHT / 2 - 100 );
 			batch.end();
 			
 			//When screen is touched when game over screen appears
