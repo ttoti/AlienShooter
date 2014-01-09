@@ -1,4 +1,4 @@
-package com.tomashernandez.alienshooter;
+package com.tomashernandez.alienshooter.game;
 
 import java.util.Iterator;
 import com.badlogic.gdx.ApplicationListener;
@@ -19,6 +19,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.TimeUtils;
+import com.tomashernandez.alienshooter.background.*;
 
 
 public class Game implements ApplicationListener{
@@ -54,7 +55,6 @@ public class Game implements ApplicationListener{
 	int difficultyMultiplier;
 	int levelUp;
 	private boolean gameOver;
-    //float adjustedX;
 	
 	@Override
 	public void create() {
@@ -67,40 +67,9 @@ public class Game implements ApplicationListener{
 		gofont = new BitmapFont();
 		gofont.scale(2f);
 		gofont.setColor(Color.WHITE);
-		bullets = new Array<Bullet2D>();
-		aliens = new Array<Rectangle>();
-		startTime = TimeUtils.millis();
-		score = 0;
-		lives = 5;
-		gameOver = false;
-		levelUp = 0;
-		difficultyMultiplier = 1;
+		defaultValues();
+		createSprites();
 		
-		//ship sprite
-	/*	This is a work in progress
-	 * 
-	 * float adjustedX =(Gdx.input.getAccelerometerX() - 2f);
-		if(adjustedX < - 2f){
-			adjustedX = - 2f;
-		}else if(adjustedX > 2f){
-			adjustedX = 2f;
-		}
-		adjustedX /= 2;
-		*/
-		
-		ship = new Texture(Gdx.files.internal("ship.png"));
-		rect_ship = new Rectangle();
-		rect_ship.width = 64;
-		rect_ship.height = 64;
-		rect_ship.x = (CAMERA_WIDTH / 2) - (rect_ship.width / 2) - 25;
-		rect_ship.y = (CAMERA_HEIGHT) - (rect_ship.height) - 750;
-		
-		
-		//Bullet sprite
-		bullet = new Texture(Gdx.files.internal("bullet.png"));		
-		
-		//Alien sprite 
-		alien = new Texture(Gdx.files.internal("alien.png"));
 		
 		//Sounds
 		hitSound = Gdx.audio.newSound(Gdx.files.internal("shoot.ogg"));
@@ -168,8 +137,7 @@ public class Game implements ApplicationListener{
 			//When screen is touched when game over screen appears
 			if(Gdx.input.isTouched() ) {
 				defaultValues();
-			}
-			
+			}			
 		}else{
 			// Render 
 			batch.setProjectionMatrix(camera.combined);
@@ -303,6 +271,23 @@ public class Game implements ApplicationListener{
 		b.height = 100;		
 		aliens.add(b);		
 		lastAlienTime = TimeUtils.nanoTime();	
+	}
+	
+	public void createSprites(){
+				//ship sprite
+				ship = new Texture(Gdx.files.internal("ship.png"));
+				rect_ship = new Rectangle();
+				rect_ship.width = 64;
+				rect_ship.height = 64;
+				rect_ship.x = (CAMERA_WIDTH / 2) - (rect_ship.width / 2) - 25;
+				rect_ship.y = (CAMERA_HEIGHT) - (rect_ship.height) - 750;
+				
+				
+				//Bullet sprite
+				bullet = new Texture(Gdx.files.internal("bullet.png"));		
+				
+				//Alien sprite 
+				alien = new Texture(Gdx.files.internal("alien.png"));
 	}
 	
 	public void defaultValues(){

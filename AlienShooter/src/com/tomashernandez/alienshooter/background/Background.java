@@ -1,4 +1,4 @@
-package com.tomashernandez.alienshooter;
+package com.tomashernandez.alienshooter.background;
 
 
 import com.badlogic.gdx.graphics.Camera;

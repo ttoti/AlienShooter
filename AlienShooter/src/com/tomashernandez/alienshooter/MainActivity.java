@@ -1,6 +1,7 @@
 package com.tomashernandez.alienshooter;
 
 import com.badlogic.gdx.backends.android.AndroidApplication;
+import com.tomashernandez.alienshooter.game.Game;
 
 public class MainActivity extends AndroidApplication {
 

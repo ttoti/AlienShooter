@@ -1,4 +1,4 @@
-package com.tomashernandez.alienshooter;
+package com.tomashernandez.alienshooter.menu;
 
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
