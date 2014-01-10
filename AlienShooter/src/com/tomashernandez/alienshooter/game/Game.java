@@ -26,8 +26,9 @@ public class Game implements ApplicationListener{
 
  	public static final int CAMERA_WIDTH = 480;
 	public static final int CAMERA_HEIGHT = 800;
+	public static final int GAME_PAUSED = 0;
 	
-	Input vibrate;
+    Input vibrate;
 	Background background;
 	Music backgroundMusic;
 	Sound liveUpSound, levelUpSound, hitSound, shootSound;
@@ -40,8 +41,9 @@ public class Game implements ApplicationListener{
 	BitmapFont font, goFont;
 	TextureRegion bgRegion;
 	long startTime, lastShotTime, lastAlienTime;
-	int score, lives, difficultyMultiplier, levelUp;
+	int score, lives, difficultyMultiplier, levelUp, bulletsPresent;
 	private boolean gameOver;
+	int gamestatus;
 	
 	@Override
 	public void create() {
@@ -97,11 +99,14 @@ public class Game implements ApplicationListener{
 		backgroundMusic.dispose();
 		liveUpSound.dispose();
 	}
-
+	
+	public  void pauseGame(){
+		gamestatus = GAME_PAUSED;
+	}
+	
 	@Override
 	public void pause() {
-		
-		
+		pauseGame();
 	}
 
 	@Override
@@ -150,6 +155,7 @@ public class Game implements ApplicationListener{
 				b.rect.x += Gdx.graphics.getDeltaTime() * b.slope.x;
 				if(b.rect.y + 16 < 0){
 					iter.remove();
+					bulletsPresent--;
 				}else{
 					//When bullet hits an alien
 					Iterator<Rectangle> iterb = aliens.iterator();
@@ -157,8 +163,11 @@ public class Game implements ApplicationListener{
 						Rectangle baddie = iterb.next();
 						if(baddie.overlaps(b.rect)){
 							hitSound.play();
-							iter.remove();
 							iterb.remove();
+							if (bulletsPresent > 0) {
+								iter.remove();
+								bulletsPresent--;
+							}
 							score++;
 							levelUp++;
 							
@@ -246,6 +255,7 @@ public class Game implements ApplicationListener{
 		b.slope = slope;
 		
 		bullets.add(b);
+		bulletsPresent++;
 		shootSound.play();
 		lastShotTime = TimeUtils.nanoTime();
 	}
@@ -286,6 +296,7 @@ public class Game implements ApplicationListener{
 		startTime = TimeUtils.millis();
 		aliens = new Array<Rectangle>();
 		bullets = new Array<Bullet2D>();
+		bulletsPresent = 0;
 	}
 
 	@Override
