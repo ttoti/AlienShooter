@@ -58,32 +58,7 @@ public class Game implements ApplicationListener{
 		goFont.setColor(Color.WHITE);
 		defaultValues();
 		createSprites();
-		
-		
-		//Sounds
-		hitSound = Gdx.audio.newSound(Gdx.files.internal("shoot.ogg"));
-		
-		levelUpSound = Gdx.audio.newSound(Gdx.files.internal("levelUp.wav"));
-		levelUpSound.setVolume(0, 0.75f);
-		
-		liveUpSound = Gdx.audio.newSound(Gdx.files.internal("liveUp.ogg"));
-		
-		shootSound = Gdx.audio.newSound(Gdx.files.internal("shootSound.mp3"));
-		
-		//Background music
-		backgroundMusic = Gdx.audio.newMusic(Gdx.files.internal("backgroundMusic.mp3"));
-		backgroundMusic.setLooping(true);
-		backgroundMusic.setVolume(0.6f);
-	
-		
-		//Background
-		Texture bgTexture = new Texture(Gdx.files.internal("spaceBG.png"));
-		bgRegion = new TextureRegion(bgTexture);
-		background = new Background(new ParallaxLayer[]{
-				//First vector2 is parallax ratio. I only have the value in Y cause it makes sense to the game.
-				//Second vector2 is the start position
-				new ParallaxLayer(bgRegion, new Vector2(0, .0055f + ((TimeUtils.millis() - startTime )/ 1000)), new Vector2(0, 0))
-		}, 480, 800, new Vector2(0, 350));
+		startSounds();
 	}
 
 	//Disposes when not being used
@@ -269,22 +244,51 @@ public class Game implements ApplicationListener{
 		aliens.add(b);		
 		lastAlienTime = TimeUtils.nanoTime();	
 	}
-	
+	//Creates the images on the screen
 	public void createSprites(){
-				//ship sprite
-				ship = new Texture(Gdx.files.internal("ship.png"));
-				rect_ship = new Rectangle();
-				rect_ship.width = 64;
-				rect_ship.height = 64;
-				rect_ship.x = (CAMERA_WIDTH / 2) - (rect_ship.width / 2) - 25;
-				rect_ship.y = (CAMERA_HEIGHT) - (rect_ship.height) - 750;
+		
+		//ship sprite
+		ship = new Texture(Gdx.files.internal("images/ship.png"));
+		rect_ship = new Rectangle();
+		rect_ship.width = 64;
+		rect_ship.height = 64;
+		rect_ship.x = (CAMERA_WIDTH / 2) - (rect_ship.width / 2) - 25;
+		rect_ship.y = (CAMERA_HEIGHT) - (rect_ship.height) - 750;				
+		
+		//Bullet sprite
+		bullet = new Texture(Gdx.files.internal("images/bullet.png"));		
+		
+		//Alien sprite 
+		alien = new Texture(Gdx.files.internal("images/alien.png"));
+		
+		//Background
+		Texture bgTexture = new Texture(Gdx.files.internal("images/spaceBG.png"));
+		bgRegion = new TextureRegion(bgTexture);
+		//First vector2 is parallax ratio. I only have the value in Y cause it makes sense to the game.
+		//Second vector2 is the start position
+		background = new Background(new ParallaxLayer[]{
+		new ParallaxLayer(bgRegion, new Vector2(0, .0055f + ((TimeUtils.millis() - startTime )/ 1000)), new Vector2(0, 0))
+		}, 480, 800, new Vector2(0, 350));
+	}
+	
+	//In charge of declaring sounds
+	public void startSounds(){
+		//Sounds
+		hitSound = Gdx.audio.newSound(Gdx.files.internal("sounds/shoot.ogg"));
+		
+		levelUpSound = Gdx.audio.newSound(Gdx.files.internal("sounds/levelUp.wav"));
+		levelUpSound.setVolume(0, 0.75f);
 				
+		liveUpSound = Gdx.audio.newSound(Gdx.files.internal("sounds/liveUp.ogg"));
 				
-				//Bullet sprite
-				bullet = new Texture(Gdx.files.internal("bullet.png"));		
+		shootSound = Gdx.audio.newSound(Gdx.files.internal("sounds/shootSound.mp3"));
 				
-				//Alien sprite 
-				alien = new Texture(Gdx.files.internal("alien.png"));
+		//Background music
+		backgroundMusic = Gdx.audio.newMusic(Gdx.files.internal("sounds/backgroundMusic.mp3"));
+		backgroundMusic.setLooping(true);
+		backgroundMusic.setVolume(0.6f);
+			
+		
 	}
 	
 	public void defaultValues(){
