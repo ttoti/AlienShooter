@@ -28,6 +28,7 @@ public class Game implements ApplicationListener{
 	public static final int CAMERA_HEIGHT = 800;
 	public static final int GAME_PAUSED = 0;
 	
+	String scoreString;
     Input vibrate;
 	Background background;
 	Music backgroundMusic;
@@ -97,7 +98,7 @@ public class Game implements ApplicationListener{
 			batch.setProjectionMatrix(camera.combined);
 			batch.begin();
 			goFont.draw(batch, "Game Over!", CAMERA_WIDTH / 2 - goFont.getBounds("Game Over!").width / 2, CAMERA_HEIGHT / 2 + 100);
-			font.draw(batch, "Score : " + score, CAMERA_WIDTH / 2 - font.getBounds("Score : XX").width / 2, CAMERA_HEIGHT / 2);
+			font.draw(batch, scoreString + score, CAMERA_WIDTH / 2 - font.getBounds(scoreString).width / 2, CAMERA_HEIGHT / 2);
 			goFont.draw(batch,"Tap to restart", CAMERA_WIDTH / 2 - goFont.getBounds("Tap to restart").width / 2, CAMERA_HEIGHT / 2 - 100 );
 			batch.end();
 			
@@ -110,7 +111,7 @@ public class Game implements ApplicationListener{
 			batch.setProjectionMatrix(camera.combined);
 			batch.begin();
 			font.draw(batch, "Level: " + difficultyMultiplier, 17, CAMERA_HEIGHT - 10);
-			font.draw(batch, "Score: " + score, 10, CAMERA_HEIGHT - 40);
+			font.draw(batch, scoreString + score, 10, CAMERA_HEIGHT - 40);
 			font.draw(batch, "Lives: " + lives, CAMERA_WIDTH - 120, CAMERA_HEIGHT - 10);
 			for(Rectangle b : aliens){
 				batch.draw(alien, b.x, b.y);
@@ -301,6 +302,7 @@ public class Game implements ApplicationListener{
 		aliens = new Array<Rectangle>();
 		bullets = new Array<Bullet2D>();
 		bulletsPresent = 0;
+		scoreString = "Score : ";
 	}
 
 	@Override
