@@ -40,11 +40,11 @@ public class Game implements ApplicationListener{
 	OrthographicCamera camera;
 	SpriteBatch batch;
 	BitmapFont font, goFont;
-	TextureRegion bgRegion;
+	TextureRegion backgroundRegion;
 	long startTime, lastShotTime, lastAlienTime;
 	int score, lives, difficultyMultiplier, levelUp, bulletsPresent;
 	private boolean gameOver;
-	int gamestatus;
+	int gameStatus;
 	
 	@Override
 	public void create() {
@@ -77,7 +77,7 @@ public class Game implements ApplicationListener{
 	}
 	
 	public  void pauseGame(){
-		gamestatus = GAME_PAUSED;
+		gameStatus = GAME_PAUSED;
 	}
 	
 	@Override
@@ -136,8 +136,8 @@ public class Game implements ApplicationListener{
 					//When bullet hits an alien
 					Iterator<Rectangle> iterb = aliens.iterator();
 					while(iterb.hasNext()){
-						Rectangle baddie = iterb.next();
-						if(baddie.overlaps(b.rect)){
+						Rectangle alienShape = iterb.next();
+						if(alienShape.overlaps(b.rect)){
 							hitSound.play();
 							iterb.remove();
 							if (bulletsPresent > 0) {
@@ -264,11 +264,11 @@ public class Game implements ApplicationListener{
 		
 		//Background
 		Texture bgTexture = new Texture(Gdx.files.internal("images/spaceBG.png"));
-		bgRegion = new TextureRegion(bgTexture);
+		backgroundRegion = new TextureRegion(bgTexture);
 		//First vector2 is parallax ratio. I only have the value in Y cause it makes sense to the game.
 		//Second vector2 is the start position
 		background = new Background(new ParallaxLayer[]{
-		new ParallaxLayer(bgRegion, new Vector2(0, .0055f + ((TimeUtils.millis() - startTime )/ 1000)), new Vector2(0, 0))
+		new ParallaxLayer(backgroundRegion, new Vector2(0, .0055f + ((TimeUtils.millis() - startTime )/ 1000)), new Vector2(0, 0))
 		}, 480, 800, new Vector2(0, 350));
 	}
 	
