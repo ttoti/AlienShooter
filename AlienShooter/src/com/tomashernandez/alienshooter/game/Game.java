@@ -110,8 +110,8 @@ public class Game implements ApplicationListener{
 			// Render 
 			batch.setProjectionMatrix(camera.combined);
 			batch.begin();
-			font.draw(batch, "Level: " + difficultyMultiplier, 17, CAMERA_HEIGHT - 10);
-			font.draw(batch, scoreString + score, 10, CAMERA_HEIGHT - 40);
+			font.draw(batch, scoreString + score, 10, CAMERA_HEIGHT - 10);
+			font.draw(batch, "Level: " + difficultyMultiplier, 17, CAMERA_HEIGHT - 40);
 			font.draw(batch, "Lives: " + lives, CAMERA_WIDTH - 120, CAMERA_HEIGHT - 10);
 			for(Rectangle b : aliens){
 				batch.draw(alien, b.x, b.y);
@@ -302,7 +302,7 @@ public class Game implements ApplicationListener{
 		aliens = new Array<Rectangle>();
 		bullets = new Array<Bullet2D>();
 		bulletsPresent = 0;
-		scoreString = "Score : ";
+		scoreString = "Score: ";
 	}
 
 	@Override
