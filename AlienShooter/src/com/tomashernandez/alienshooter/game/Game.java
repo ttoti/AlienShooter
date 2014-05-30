@@ -7,7 +7,7 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.GL10;
+import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -17,6 +17,7 @@ import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
+import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.TimeUtils;
 import com.tomashernandez.alienshooter.background.*;
@@ -27,6 +28,7 @@ public class Game implements ApplicationListener{
  	public static final int CAMERA_WIDTH = 480;
 	public static final int CAMERA_HEIGHT = 800;
 	public static final int GAME_PAUSED = 0;
+	
 	
 	String scoreString;
     Input vibrate;
@@ -39,6 +41,7 @@ public class Game implements ApplicationListener{
 	Array<Rectangle> aliens;
 	OrthographicCamera camera;
 	SpriteBatch batch;
+	World world;
 	BitmapFont font, goFont;
 	TextureRegion backgroundRegion;
 	long startTime, lastShotTime, lastAlienTime;
@@ -88,7 +91,7 @@ public class Game implements ApplicationListener{
 	@Override
 	public void render() {
 		Gdx.gl.glClearColor(1f, 1f, 1f, 0.5f);
-		Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
+		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		//Renders the background
 		background.render(1);
 		camera.update();
