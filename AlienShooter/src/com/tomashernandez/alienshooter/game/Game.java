@@ -1,9 +1,10 @@
 package com.tomashernandez.alienshooter.game;
 
 import java.util.Iterator;
-import com.badlogic.gdx.ApplicationListener;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Color;
@@ -23,13 +24,13 @@ import com.badlogic.gdx.utils.TimeUtils;
 import com.tomashernandez.alienshooter.background.*;
 
 
-public class Game implements ApplicationListener{
+public class Game implements Screen{
 
  	public static final int CAMERA_WIDTH = 480;
 	public static final int CAMERA_HEIGHT = 800;
 	public static final int GAME_PAUSED = 0;
 	
-	
+	final GameClass game;
 	String scoreString;
     Input vibrate;
 	Background background;
@@ -42,15 +43,17 @@ public class Game implements ApplicationListener{
 	OrthographicCamera camera;
 	SpriteBatch batch;
 	World world;
-	BitmapFont font, goFont;
+	BitmapFont font;
+	BitmapFont goFont;
 	TextureRegion backgroundRegion;
 	long startTime, lastShotTime, lastAlienTime;
 	int score, lives, difficultyMultiplier, levelUp, bulletsPresent;
 	private boolean gameOver;
-	int gameStatus;
 	
-	@Override
-	public void create() {
+	
+	public Game(final GameClass gam) {
+		this.game = gam;
+		
 		camera = new OrthographicCamera();
 		camera.setToOrtho(false, CAMERA_WIDTH, CAMERA_HEIGHT);
 		batch = new SpriteBatch();
@@ -78,18 +81,10 @@ public class Game implements ApplicationListener{
 		backgroundMusic.dispose();
 		liveUpSound.dispose();
 	}
-	
-	public  void pauseGame(){
-		gameStatus = GAME_PAUSED;
-	}
-	
-	@Override
-	public void pause() {
-		pauseGame();
-	}
 
+	
 	@Override
-	public void render() {
+	public void render(float delta) {
 		Gdx.gl.glClearColor(1f, 1f, 1f, 0.5f);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		//Renders the background
@@ -310,6 +305,25 @@ public class Game implements ApplicationListener{
 
 	@Override
 	public void resize(int arg0, int arg1) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void hide() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void show() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void pause() {
 		// TODO Auto-generated method stub
 		
 	}
