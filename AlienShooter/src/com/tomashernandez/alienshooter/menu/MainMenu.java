@@ -5,30 +5,35 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Texture;
 import com.tomashernandez.alienshooter.game.*;
+
 
 public class MainMenu implements Screen {
 	
 	final GameClass game;
 	OrthographicCamera camera;
-	
+	Texture bg;
+
 
 	public MainMenu(final GameClass gam) {
 		game = gam;
 		camera = new OrthographicCamera();
-		camera.setToOrtho(false, 800, 480);
+		camera.setToOrtho(false, 480, 800);
 		game.font.scale(1f);
 		game.font.setColor(Color.WHITE);
 	}
 	@Override
 	public void render(float arg0) {
+		bg = new Texture(Gdx.files.internal("images/spaceBG.png"));
 		Gdx.gl.glClearColor(1f, 1f, 1f, 0.5f);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		game.batch.setProjectionMatrix(camera.combined);
 		camera.update();
 		game.batch.begin();
-		game.font.draw(game.batch, "Welcome to Alien Invaders!", 100, 150);
-		game.font.draw(game.batch, "Tap anywhere to begin!", 100, 100);
+		game.batch.draw(bg, 0, 0);
+		game.font.draw(game.batch, "Welcome to Alien Invaders!", 75, 450);
+		game.font.draw(game.batch, "Hold down anywhere to begin!", 60, 400);
 		game.batch.end();
 		
 		if(Gdx.input.isTouched()){
@@ -39,7 +44,7 @@ public class MainMenu implements Screen {
 
 	@Override
 	public void dispose() {
-		// TODO Auto-generated method stub
+		bg.dispose();
 		
 	}
 	@Override

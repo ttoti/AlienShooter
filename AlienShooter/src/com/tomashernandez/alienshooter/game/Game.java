@@ -81,10 +81,8 @@ public class Game implements Screen{
 		backgroundMusic.dispose();
 		liveUpSound.dispose();
 	}
-
-	
 	@Override
-	public void render(float delta) {
+	public void render(float arg0) {
 		Gdx.gl.glClearColor(1f, 1f, 1f, 0.5f);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		//Renders the background
@@ -96,7 +94,7 @@ public class Game implements Screen{
 			batch.setProjectionMatrix(camera.combined);
 			batch.begin();
 			goFont.draw(batch, "Game Over!", CAMERA_WIDTH / 2 - goFont.getBounds("Game Over!").width / 2, CAMERA_HEIGHT / 2 + 100);
-			font.draw(batch, scoreString + score, CAMERA_WIDTH / 2 - font.getBounds(scoreString).width / 2, CAMERA_HEIGHT / 2);
+			goFont.draw(batch, scoreString + score, (CAMERA_WIDTH / 2 - goFont.getBounds(scoreString).width / 2) - 10, CAMERA_HEIGHT / 2);
 			goFont.draw(batch,"Tap to restart", CAMERA_WIDTH / 2 - goFont.getBounds("Tap to restart").width / 2, CAMERA_HEIGHT / 2 - 100 );
 			batch.end();
 			
