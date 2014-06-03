@@ -106,8 +106,8 @@ public class Game implements Screen{
 			// Render 
 			batch.setProjectionMatrix(camera.combined);
 			batch.begin();
-			font.draw(batch, scoreString + score, 10, CAMERA_HEIGHT - 10);
-			font.draw(batch, "Level: " + difficultyMultiplier, 17, CAMERA_HEIGHT - 40);
+			font.draw(batch, "Level: " + difficultyMultiplier, 18, CAMERA_HEIGHT - 10);
+			font.draw(batch, scoreString + score, 10, CAMERA_HEIGHT - 40);
 			font.draw(batch, "Lives: " + lives, CAMERA_WIDTH - 120, CAMERA_HEIGHT - 10);
 			for(Rectangle b : aliens){
 				batch.draw(alien, b.x, b.y);
